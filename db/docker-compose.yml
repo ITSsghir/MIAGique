@@ -1,0 +1,13 @@
+services:
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: 20022003
+      MYSQL_DATABASE: jeux-miagiques
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 20022003
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
