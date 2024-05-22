@@ -16,7 +16,7 @@ public class EpreuveService {
         return epreuveRepository.findAll();
     }
 
-    public Epreuve findById(Long id) {
+    public Epreuve findById(int id) {
         return epreuveRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class EpreuveService {
         return epreuveRepository.save(epreuve);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         epreuveRepository.deleteById(id);
     }
 }

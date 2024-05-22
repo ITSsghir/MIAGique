@@ -11,15 +11,17 @@ import java.util.Date;
 public class Epreuve {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String nom;
     private Date date;
     private String infrastructure;
     private int nombrePlaces;
 
+    public Epreuve() {
+    }
     // Getters
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
     
@@ -40,7 +42,7 @@ public class Epreuve {
     }
 
     // Setters
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

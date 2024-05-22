@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 public class Billet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     private Epreuve epreuve;
@@ -19,43 +19,50 @@ public class Billet {
     private Spectateur spectateur;
 
     private double prix;
+
     private String etat; // "valide", "annulé"
 
-    // Getters and setters
-    public Long getId() {
-        return id;
+    // Constructor
+    public Billet(){
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // Getters
+    public int getId() {
+        return id;
     }
 
     public Epreuve getEpreuve() {
         return epreuve;
     }
 
-    public void setEpreuve(Epreuve epreuve) {
-        this.epreuve = epreuve;
-    }
-
     public Spectateur getSpectateur() {
         return spectateur;
-    }
-
-    public void setSpectateur(Spectateur spectateur) {
-        this.spectateur = spectateur;
     }
 
     public double getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
     public String getEtat() {
         return etat;
+    }
+
+    // Setters
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setEpreuve(Epreuve epreuve) {
+        this.epreuve = epreuve;
+    }
+
+    public void setSpectateur(Spectateur spectateur) {
+        this.spectateur = spectateur;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
     }
 
     public void setEtat(String etat) {

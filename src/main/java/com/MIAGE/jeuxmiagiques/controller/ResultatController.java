@@ -19,7 +19,7 @@ public class ResultatController {
     }
 
     @GetMapping("/{id}")
-    public Resultat getResultatById(@PathVariable Long id) {
+    public Resultat getResultatById(@PathVariable int id) {
         return resultatService.findById(id);
     }
 
@@ -29,13 +29,13 @@ public class ResultatController {
     }
 
     @PutMapping("/{id}")
-    public Resultat updateResultat(@PathVariable Long id, @RequestBody Resultat resultat) {
+    public Resultat updateResultat(@PathVariable int id, @RequestBody Resultat resultat) {
         resultat.setId(id);
         return resultatService.save(resultat);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteResultat(@PathVariable Long id) {
+    public void deleteResultat(@PathVariable int id) {
         resultatService.deleteById(id);
     }
 }

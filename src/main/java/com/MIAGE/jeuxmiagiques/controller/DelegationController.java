@@ -19,7 +19,7 @@ public class DelegationController {
     }
 
     @GetMapping("/{id}")
-    public Delegation getDelegationById(@PathVariable Long id) {
+    public Delegation getDelegationById(@PathVariable int id) {
         return delegationService.findById(id);
     }
 
@@ -29,13 +29,13 @@ public class DelegationController {
     }
 
     @PutMapping("/{id}")
-    public Delegation updateDelegation(@PathVariable Long id, @RequestBody Delegation delegation) {
+    public Delegation updateDelegation(@PathVariable int id, @RequestBody Delegation delegation) {
         delegation.setId(id);
         return delegationService.save(delegation);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDelegation(@PathVariable Long id) {
+    public void deleteDelegation(@PathVariable int id) {
         delegationService.deleteById(id);
     }
 }

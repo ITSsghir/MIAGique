@@ -19,7 +19,7 @@ public class EpreuveController {
     }
 
     @GetMapping("/{id}")
-    public Epreuve getEpreuveById(@PathVariable Long id) {
+    public Epreuve getEpreuveById(@PathVariable int id) {
         return epreuveService.findById(id);
     }
 
@@ -29,13 +29,13 @@ public class EpreuveController {
     }
 
     @PutMapping("/{id}")
-    public Epreuve updateEpreuve(@PathVariable Long id, @RequestBody Epreuve epreuve) {
+    public Epreuve updateEpreuve(@PathVariable int id, @RequestBody Epreuve epreuve) {
         epreuve.setId(id);
         return epreuveService.save(epreuve);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEpreuve(@PathVariable Long id) {
+    public void deleteEpreuve(@PathVariable int id) {
         epreuveService.deleteById(id);
     }
 }

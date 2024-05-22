@@ -1,41 +1,43 @@
 package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.Spectateur;
-import com.MIAGE.jeuxmiagiques.service.SpectateurService;
+import com.MIAGE.jeuxmiagiques.repository.SpectateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/spectateurs")
 public class SpectateurController {
     @Autowired
-    private SpectateurService spectateurService;
+    private SpectateurRepository spectateurRepository;
+
 
     @GetMapping
     public List<Spectateur> getAllSpectateurs() {
-        return spectateurService.findAll();
+        return spectateurRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Spectateur getSpectateurById(@PathVariable Long id) {
-        return spectateurService.findById(id);
+    public Optional<Spectateur> getSpectateurById(@PathVariable int id) {
+        return spectateurRepository.findById(id);
     }
 
     @PostMapping
     public Spectateur createSpectateur(@RequestBody Spectateur spectateur) {
-        return spectateurService.save(spectateur);
+        return spectateurRepository.save(spectateur);
     }
 
     @PutMapping("/{id}")
-    public Spectateur updateSpectateur(@PathVariable Long id, @RequestBody Spectateur spectateur) {
+    public Spectateur updateSpectateur(@PathVariable int id, @RequestBody Spectateur spectateur) {
         spectateur.setId(id);
-        return spectateurService.save(spectateur);
+        return spectateurRepository.save(spectateur);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteSpectateur(@PathVariable Long id) {
-        spectateurService.deleteById(id);
+    public void deleteSpectateur(@PathVariable int id) {
+        spectateurRepository.deleteById(id);
     }
 }

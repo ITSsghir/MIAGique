@@ -16,7 +16,7 @@ public class DelegationService {
         return delegationRepository.findAll();
     }
 
-    public Delegation findById(Long id) {
+    public Delegation findById(int id) {
         return delegationRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class DelegationService {
         return delegationRepository.save(delegation);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         delegationRepository.deleteById(id);
     }
 }

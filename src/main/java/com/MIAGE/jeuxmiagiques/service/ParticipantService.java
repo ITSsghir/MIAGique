@@ -16,7 +16,7 @@ public class ParticipantService {
         return participantRepository.findAll();
     }
 
-    public Participant findById(Long id) {
+    public Participant findById(int id) {
         return participantRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class ParticipantService {
         return participantRepository.save(participant);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         participantRepository.deleteById(id);
     }
 }

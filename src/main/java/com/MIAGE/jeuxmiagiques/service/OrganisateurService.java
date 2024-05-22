@@ -16,7 +16,7 @@ public class OrganisateurService {
         return organisateurRepository.findAll();
     }
 
-    public Organisateur findById(Long id) {
+    public Organisateur findById(int id) {
         return organisateurRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class OrganisateurService {
         return organisateurRepository.save(organisateur);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         organisateurRepository.deleteById(id);
     }
 }

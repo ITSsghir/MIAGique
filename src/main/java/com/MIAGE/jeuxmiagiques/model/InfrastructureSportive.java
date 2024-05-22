@@ -1,19 +1,20 @@
 package com.MIAGE.jeuxmiagiques.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+@Entity
 public class InfrastructureSportive {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String nom;
     private String adresse;
     private int capacite;
 
     // Getters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -30,7 +31,7 @@ public class InfrastructureSportive {
     }
 
     // Setters
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

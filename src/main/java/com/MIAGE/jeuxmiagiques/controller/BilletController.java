@@ -19,7 +19,7 @@ public class BilletController {
     }
 
     @GetMapping("/{id}")
-    public Billet getBilletById(@PathVariable Long id) {
+    public Billet getBilletById(@PathVariable int id) {
         return billetService.findById(id);
     }
 
@@ -29,13 +29,13 @@ public class BilletController {
     }
 
     @PutMapping("/{id}")
-    public Billet updateBillet(@PathVariable Long id, @RequestBody Billet billet) {
+    public Billet updateBillet(@PathVariable int id, @RequestBody Billet billet) {
         billet.setId(id);
         return billetService.save(billet);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBillet(@PathVariable Long id) {
+    public void deleteBillet(@PathVariable int id) {
         billetService.deleteById(id);
     }
 }

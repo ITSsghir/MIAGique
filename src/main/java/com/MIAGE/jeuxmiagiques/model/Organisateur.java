@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Organisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String nom;
     private String prenom;
     private String email;
@@ -18,11 +18,11 @@ public class Organisateur {
 
     // Getters and setters
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

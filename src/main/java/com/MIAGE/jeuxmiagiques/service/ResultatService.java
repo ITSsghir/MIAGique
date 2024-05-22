@@ -16,7 +16,7 @@ public class ResultatService {
         return resultatRepository.findAll();
     }
 
-    public Resultat findById(Long id) {
+    public Resultat findById(int id) {
         return resultatRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class ResultatService {
         return resultatRepository.save(resultat);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         resultatRepository.deleteById(id);
     }
 }

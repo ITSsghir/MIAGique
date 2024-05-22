@@ -13,7 +13,7 @@ import jakarta.persistence.OneToMany;
 public class Delegation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String nom;
     private int nombreMedailleOr;
     private int nombreMedailleArgent;
@@ -22,8 +22,12 @@ public class Delegation {
     @OneToMany(mappedBy = "delegation")
     private List<Participant> participants;
 
+    // Constructors
+    public Delegation() {
+    }
+
     // Getters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,7 +48,7 @@ public class Delegation {
     }
 
     // Setters
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

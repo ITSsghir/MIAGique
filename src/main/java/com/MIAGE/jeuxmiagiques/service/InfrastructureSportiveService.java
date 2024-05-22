@@ -16,7 +16,7 @@ public class InfrastructureSportiveService {
         return infrastructureSportiveRepository.findAll();
     }
 
-    public InfrastructureSportive findById(Long id) {
+    public InfrastructureSportive findById(int id) {
         return infrastructureSportiveRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class InfrastructureSportiveService {
         return infrastructureSportiveRepository.save(infrastructureSportive);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         infrastructureSportiveRepository.deleteById(id);
     }
 }

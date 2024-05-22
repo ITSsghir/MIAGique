@@ -19,7 +19,7 @@ public class InfrastructureSportiveController {
     }
 
     @GetMapping("/{id}")
-    public InfrastructureSportive getInfrastructureSportiveById(@PathVariable Long id) {
+    public InfrastructureSportive getInfrastructureSportiveById(@PathVariable int id) {
         return infrastructureSportiveService.findById(id);
     }
 
@@ -29,13 +29,13 @@ public class InfrastructureSportiveController {
     }
 
     @PutMapping("/{id}")
-    public InfrastructureSportive updateInfrastructureSportive(@PathVariable Long id, @RequestBody InfrastructureSportive infrastructureSportive) {
+    public InfrastructureSportive updateInfrastructureSportive(@PathVariable int id, @RequestBody InfrastructureSportive infrastructureSportive) {
         infrastructureSportive.setId(id);
         return infrastructureSportiveService.save(infrastructureSportive);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteInfrastructureSportive(@PathVariable Long id) {
+    public void deleteInfrastructureSportive(@PathVariable int id) {
         infrastructureSportiveService.deleteById(id);
     }
 }

@@ -1,10 +1,11 @@
 services:
   db:
+    platform: linux/x86_64
     image: mysql:5.7
     container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: 20022003
-      MYSQL_DATABASE: jeux-miagiques
+      MYSQL_DATABASE: jeuxmiagiques
       MYSQL_USER: user
       MYSQL_PASSWORD: 20022003
     ports:

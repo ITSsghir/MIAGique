@@ -10,13 +10,13 @@ import java.util.List;
 @Service
 public class SpectateurService {
     @Autowired
-    private SpectateurRepository spectateurRepository;
+    private static SpectateurRepository spectateurRepository;
 
     public List<Spectateur> findAll() {
         return spectateurRepository.findAll();
     }
 
-    public Spectateur findById(Long id) {
+    public Spectateur findById(int id) {
         return spectateurRepository.findById(id).orElse(null);
     }
 
@@ -24,7 +24,7 @@ public class SpectateurService {
         return spectateurRepository.save(spectateur);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         spectateurRepository.deleteById(id);
     }
 }

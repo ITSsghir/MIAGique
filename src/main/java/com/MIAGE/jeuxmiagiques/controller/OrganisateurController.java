@@ -19,7 +19,7 @@ public class OrganisateurController {
     }
 
     @GetMapping("/{id}")
-    public Organisateur getOrganisateurById(@PathVariable Long id) {
+    public Organisateur getOrganisateurById(@PathVariable int id) {
         return organisateurService.findById(id);
     }
 
@@ -29,13 +29,13 @@ public class OrganisateurController {
     }
 
     @PutMapping("/{id}")
-    public Organisateur updateOrganisateur(@PathVariable Long id, @RequestBody Organisateur organisateur) {
+    public Organisateur updateOrganisateur(@PathVariable int id, @RequestBody Organisateur organisateur) {
         organisateur.setId(id);
         return organisateurService.save(organisateur);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOrganisateur(@PathVariable Long id) {
+    public void deleteOrganisateur(@PathVariable int id) {
         organisateurService.deleteById(id);
     }
 }

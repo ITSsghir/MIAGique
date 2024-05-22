@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 public class Resultat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     private Epreuve epreuve;
@@ -22,11 +22,11 @@ public class Resultat {
     private int position;
 
     // Getters and setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
