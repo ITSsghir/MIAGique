@@ -26,7 +26,7 @@ public class BilletService {
     }
     // doesn't work
     public Billet save(Billet billet) {
-        return billetRepository.save(billet1);
+        return billetRepository.save(billet);
     }
 
     public void deleteById(int id) {
