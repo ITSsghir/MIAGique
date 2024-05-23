@@ -30,7 +30,6 @@ public class EpreuveController {
 
     @PutMapping("/{id}")
     public Epreuve updateEpreuve(@PathVariable int id, @RequestBody Epreuve epreuve) {
-        epreuve.setId(id);
         return epreuveService.save(epreuve);
     }
 

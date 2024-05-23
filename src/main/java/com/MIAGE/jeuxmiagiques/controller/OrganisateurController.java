@@ -30,7 +30,6 @@ public class OrganisateurController {
 
     @PutMapping("/{id}")
     public Organisateur updateOrganisateur(@PathVariable int id, @RequestBody Organisateur organisateur) {
-        organisateur.setId(id);
         return organisateurService.save(organisateur);
     }
 

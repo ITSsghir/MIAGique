@@ -49,10 +49,6 @@ public class Billet {
 
     // Setters
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setEpreuve(Epreuve epreuve) {
         this.epreuve = epreuve;
     }

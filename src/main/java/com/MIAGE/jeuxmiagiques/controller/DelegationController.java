@@ -30,7 +30,6 @@ public class DelegationController {
 
     @PutMapping("/{id}")
     public Delegation updateDelegation(@PathVariable int id, @RequestBody Delegation delegation) {
-        delegation.setId(id);
         return delegationService.save(delegation);
     }
 

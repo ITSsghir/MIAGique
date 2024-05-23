@@ -30,7 +30,6 @@ public class ResultatController {
 
     @PutMapping("/{id}")
     public Resultat updateResultat(@PathVariable int id, @RequestBody Resultat resultat) {
-        resultat.setId(id);
         return resultatService.save(resultat);
     }
 

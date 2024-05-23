@@ -30,7 +30,6 @@ public class InfrastructureSportiveController {
 
     @PutMapping("/{id}")
     public InfrastructureSportive updateInfrastructureSportive(@PathVariable int id, @RequestBody InfrastructureSportive infrastructureSportive) {
-        infrastructureSportive.setId(id);
         return infrastructureSportiveService.save(infrastructureSportive);
     }
 

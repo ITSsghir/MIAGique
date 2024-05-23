@@ -1,11 +1,7 @@
 package com.MIAGE.jeuxmiagiques.service;
 
 import com.MIAGE.jeuxmiagiques.model.Billet;
-import com.MIAGE.jeuxmiagiques.model.Epreuve;
-import com.MIAGE.jeuxmiagiques.model.Spectateur;
 import com.MIAGE.jeuxmiagiques.repository.BilletRepository;
-import com.MIAGE.jeuxmiagiques.repository.EpreuveRepository;
-import com.MIAGE.jeuxmiagiques.repository.SpectateurRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +10,13 @@ import java.util.List;
 
 @Service
 public class BilletService {
-    @Autowired
+
     private BilletRepository billetRepository;
 
+    @Autowired
+    public BilletService(BilletRepository billetRepository) {
+        this.billetRepository = billetRepository;
+    }
     public List<Billet> findAll() {
         return billetRepository.findAll();
     }

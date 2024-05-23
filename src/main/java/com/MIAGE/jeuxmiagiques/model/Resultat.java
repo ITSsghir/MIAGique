@@ -25,11 +25,7 @@ public class Resultat {
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     public Epreuve getEpreuve() {
         return epreuve;
     }

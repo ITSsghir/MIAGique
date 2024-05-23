@@ -9,8 +9,13 @@ import java.util.List;
 
 @Service
 public class SpectateurService {
+
+    private SpectateurRepository spectateurRepository;
+
     @Autowired
-    private static SpectateurRepository spectateurRepository;
+    public SpectateurService(SpectateurRepository spectateurRepository) {
+        this.spectateurRepository = spectateurRepository;
+    }
 
     public List<Spectateur> findAll() {
         return spectateurRepository.findAll();

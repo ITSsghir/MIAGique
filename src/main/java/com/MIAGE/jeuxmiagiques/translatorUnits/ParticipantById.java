@@ -1,4 +1,4 @@
-package com.MIAGE.jeuxmiagiques.model;
+package com.MIAGE.jeuxmiagiques.translatorUnits;
 
 import java.util.List;
 
@@ -9,26 +9,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Participant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class ParticipantById {
 
     private String nom;
     private String prenom;
     private String email;
 
     @ManyToOne
-    private Delegation delegation;
+    private int delegationId;
 
     // Constructors
-    public Participant() {
+    public ParticipantById(String nom, String prenom, String email, int delegationId) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.delegationId = delegationId;
     }
 
     // Getters
-    public int getId() {
-        return id;
-    }
 
     public String getNom() {
         return nom;
@@ -42,8 +40,8 @@ public class Participant {
         return email;
     }
 
-    public Delegation getDelegation() {
-        return delegation;
+    public int getDelegationId() {
+        return delegationId;
     }
 
     // Setters
@@ -59,7 +57,7 @@ public class Participant {
         this.email = email;
     }
 
-    public void setDelegation(Delegation delegation) {
-        this.delegation = delegation;
+    public void setDelegationId(int delegationId) {
+        this.delegationId = delegationId;
     }
 }

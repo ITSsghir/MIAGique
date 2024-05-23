@@ -9,8 +9,13 @@ import java.util.List;
 
 @Service
 public class ParticipantService {
-    @Autowired
+
     private ParticipantRepository participantRepository;
+
+    @Autowired
+    public ParticipantService(ParticipantRepository participantRepository) {
+        this.participantRepository = participantRepository;
+    }
 
     public List<Participant> findAll() {
         return participantRepository.findAll();
