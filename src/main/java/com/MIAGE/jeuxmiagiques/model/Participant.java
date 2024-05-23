@@ -7,37 +7,26 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Participant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Participant extends User {
 
     private String nom;
     private String prenom;
-    private String email;
 
     @ManyToOne
     private Delegation delegation;
 
     // Constructors
     public Participant() {
+        super();
     }
 
     // Getters
-    public int getId() {
-        return id;
-    }
-
     public String getNom() {
         return nom;
     }
 
     public String getPrenom() {
         return prenom;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public Delegation getDelegation() {
@@ -51,10 +40,6 @@ public class Participant {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public void setDelegation(Delegation delegation) {

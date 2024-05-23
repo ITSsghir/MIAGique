@@ -1,27 +1,16 @@
 package com.MIAGE.jeuxmiagiques.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 
 @Entity
-public class Organisateur {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Organisateur extends User {
+
     private String nom;
     private String prenom;
-    private String email;
     private String role; // "organisateur" ou "controleur"
 
     // Getters and setters
-
-    public int getId() {
-        return id;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -38,14 +27,6 @@ public class Organisateur {
         this.prenom = prenom;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getRole() {
         return role;
     }
@@ -53,6 +34,4 @@ public class Organisateur {
     public void setRole(String role) {
         this.role = role;
     }
-
-    
 }
