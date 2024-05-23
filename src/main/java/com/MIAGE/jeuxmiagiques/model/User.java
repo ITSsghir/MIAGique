@@ -12,11 +12,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String nom;
+    private String prenom;
     private String email;
-
     private String password;
-
-    private String role;
+    private String userRole;
+    private static final String authRole = "ROLE_USER";
 
     // Constructors
     public User() {
@@ -27,6 +28,14 @@ public class User {
         return id;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -35,8 +44,20 @@ public class User {
         return password;
     }
 
-    public String getRole() {
-        return role;
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public static String getAuthRole() {
+        return authRole;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     public void setEmail(String email) {
@@ -47,7 +68,7 @@ public class User {
         this.password = password;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }

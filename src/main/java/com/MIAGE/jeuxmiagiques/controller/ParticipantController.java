@@ -2,11 +2,14 @@ package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.Delegation;
 import com.MIAGE.jeuxmiagiques.model.Participant;
+
 import com.MIAGE.jeuxmiagiques.repository.DelegationRepository;
 import com.MIAGE.jeuxmiagiques.repository.ParticipantRepository;
+
 import com.MIAGE.jeuxmiagiques.translationUnits.ParticipantById;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 
@@ -41,7 +44,7 @@ public class ParticipantController {
         participant.setNom(body.getNom());
         participant.setPrenom(body.getPrenom());
         participant.setDelegation(delegation);
-        participant.setRole("PARTICIPANT");
+        participant.setUserRole("participant");
         return participantRepository.save(participant);
     }
 

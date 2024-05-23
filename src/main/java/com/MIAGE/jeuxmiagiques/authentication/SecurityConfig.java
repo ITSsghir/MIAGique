@@ -1,68 +1,54 @@
 package com.MIAGE.jeuxmiagiques.authentication;
 
+import com.MIAGE.jeuxmiagiques.service.CustomUserDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import com.MIAGE.jeuxmiagiques.model.User;
-import com.MIAGE.jeuxmiagiques.repository.UserRepository;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private UserRepository userRepository;
+    @SuppressWarnings("unused")
+    private final CustomUserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
-    
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(authorizeRequests -> 
-                authorizeRequests
-                    .requestMatchers("/public/**", "/register").permitAll() // Allow public URLs
-                    .anyRequest().authenticated() // Secure all other URLs
+            .authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/register/**").permitAll()
+                .requestMatchers("/login").permitAll()
+                .requestMatchers("/logout").permitAll()
+                .anyRequest().authenticated()
             )
-            .formLogin(formLogin -> 
-                formLogin
-                    .loginPage("/login") // Custom login page
-                    .permitAll()
-            )
-            .logout(logout -> 
-                logout
-                    .permitAll()
-            );
+            .logout((logout) -> logout.permitAll())
+            .csrf((csrf) -> csrf.disable());  // Disable CSRF for this example
 
         return http.build();
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return email -> {
-            User user = userRepository.findByEmail(email);
-            if (user == null) {
-                throw new UsernameNotFoundException("User not found");
-            }
-            return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
-                .password(user.getPassword())
-                .roles(user.getRole())
-                .build();
-        };
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    // No need to declare userDetailsService() as a bean
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }

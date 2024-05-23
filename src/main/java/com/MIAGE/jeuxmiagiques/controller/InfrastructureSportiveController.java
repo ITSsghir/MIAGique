@@ -1,8 +1,11 @@
 package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.InfrastructureSportive;
+
 import com.MIAGE.jeuxmiagiques.service.InfrastructureSportiveService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

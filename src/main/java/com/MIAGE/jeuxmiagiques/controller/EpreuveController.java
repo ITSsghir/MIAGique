@@ -1,8 +1,11 @@
 package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.Epreuve;
+
 import com.MIAGE.jeuxmiagiques.service.EpreuveService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

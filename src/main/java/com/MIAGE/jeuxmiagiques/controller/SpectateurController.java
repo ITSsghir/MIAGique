@@ -1,9 +1,11 @@
 package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.Spectateur;
+
 import com.MIAGE.jeuxmiagiques.service.SpectateurService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +34,7 @@ public class SpectateurController {
 
     @PostMapping
     public Spectateur createSpectateur(@RequestBody Spectateur spectateur) {
-        spectateur.setRole("SPECTATEUR");
+        spectateur.setUserRole("spectateur");
         return spectateurService.save(spectateur);
     }
 

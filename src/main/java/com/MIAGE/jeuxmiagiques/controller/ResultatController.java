@@ -1,14 +1,18 @@
 package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.Resultat;
-import com.MIAGE.jeuxmiagiques.repository.ParticipantRepository;
 import com.MIAGE.jeuxmiagiques.model.Epreuve;
 import com.MIAGE.jeuxmiagiques.model.Participant;
+
 import com.MIAGE.jeuxmiagiques.service.ResultatService;
 import com.MIAGE.jeuxmiagiques.service.EpreuveService;
+
 import com.MIAGE.jeuxmiagiques.translationUnits.ResultatById;
 
+import com.MIAGE.jeuxmiagiques.repository.ParticipantRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

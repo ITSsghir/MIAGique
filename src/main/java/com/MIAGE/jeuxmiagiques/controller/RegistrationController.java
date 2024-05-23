@@ -1,87 +1,91 @@
 package com.MIAGE.jeuxmiagiques.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.MIAGE.jeuxmiagiques.model.Organisateur;
 import com.MIAGE.jeuxmiagiques.model.Participant;
 import com.MIAGE.jeuxmiagiques.model.Spectateur;
 import com.MIAGE.jeuxmiagiques.model.User;
+
 import com.MIAGE.jeuxmiagiques.repository.OrganisateurRepository;
 import com.MIAGE.jeuxmiagiques.repository.ParticipantRepository;
 import com.MIAGE.jeuxmiagiques.repository.SpectateurRepository;
 import com.MIAGE.jeuxmiagiques.repository.UserRepository;
 
-@Controller
+@RestController
 @RequestMapping("/register")
 public class RegistrationController {
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private SpectateurRepository spectateurRepository;
-
-    @Autowired
     private OrganisateurRepository organisateurRepository;
-
-    @Autowired
     private ParticipantRepository participantRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping
-    public String showRegistrationForm() {
-        return "register";
+    @Autowired
+    public RegistrationController(UserRepository userRepository, SpectateurRepository spectateurRepository, OrganisateurRepository organisateurRepository, ParticipantRepository participantRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.spectateurRepository = spectateurRepository;
+        this.organisateurRepository = organisateurRepository;
+        this.participantRepository = participantRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/register/spectateur")
-    public String registerSpectateur(User user) {
+    @PostMapping("/spectateur")
+    // It works
+    public Spectateur registerSpectateur(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            return "redirect:/register?error";
+            throw new RuntimeException("User already exists");
         }
-
         Spectateur spectateur = new Spectateur();
-        spectateur.setEmail(user.getEmail());
         spectateur.setPassword(passwordEncoder.encode(user.getPassword()));
-        spectateur.setRole("SPECTATEUR");
-        spectateurRepository.save(spectateur);
-
-        return "redirect:/login";
+        spectateur.setUserRole("spectateur");
+        spectateur.setNom(user.getNom());
+        spectateur.setPrenom(user.getPrenom());
+        spectateur.setEmail(user.getEmail());
+        spectateur.setUserRole(user.getUserRole());
+        
+        return spectateurRepository.save(spectateur);
     }
 
-    @PostMapping("/register/organisateur")
-    public String registerOrganisateur(User user) {
+    @PostMapping("/organisateur")
+    public Organisateur registerOrganisateur(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            return "redirect:/register?error";
+            throw new RuntimeException("User already exists");
         }
 
         Organisateur organisateur = new Organisateur();
-        organisateur.setEmail(user.getEmail());
         organisateur.setPassword(passwordEncoder.encode(user.getPassword()));
-        organisateur.setRole("ORGANISATEUR");
-        organisateurRepository.save(organisateur);
-
-        return "redirect:/login";
+        organisateur.setUserRole("organisateur");
+        organisateur.setNom(user.getNom());
+        organisateur.setPrenom(user.getPrenom());
+        organisateur.setEmail(user.getEmail());
+        organisateur.setUserRole(user.getUserRole());
+        
+        return organisateurRepository.save(organisateur);
     }
 
-    @PostMapping("/register/participant")
-    public String registerParticipant(User user) {
+    @PostMapping("/participant")
+    public Participant registerParticipant(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            return "redirect:/register?error";
+            throw new RuntimeException("User already exists");
         }
 
         Participant participant = new Participant();
-        participant.setEmail(user.getEmail());
         participant.setPassword(passwordEncoder.encode(user.getPassword()));
-        participant.setRole("PARTICIPANT");
-        participantRepository.save(participant);
-
-        return "redirect:/login";
+        participant.setUserRole("participant");
+        participant.setNom(user.getNom());
+        participant.setPrenom(user.getPrenom());
+        participant.setEmail(user.getEmail());
+        participant.setUserRole(user.getUserRole());
+        
+        return participantRepository.save(participant);
     }
 }
