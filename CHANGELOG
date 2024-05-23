@@ -1,0 +1,17 @@
+
+- /api/spectateurs
+- GET /api/spectateurs
+- GET /api/spectateurs/{id}
+- POST /api/spectateurs
+- PUT /api/spectateurs/{id}
+- DELETE /api/spectateurs/{id}
+- /api/epreuves
+- GET /api/epreuves
+- GET /api/epreuves/{id}
+- POST /api/epreuves
+- PUT /api/epreuves/{id}
+- DELETE /api/epreuves/{id}
+- /api/billets (décomposé en Spectateur et Epreuve problème) - 
+- GET /api/billets
+- GET /api/billets/{id}
+- POST /api/billets <<<<<<<< Create an intermidiate class (object with params in body : id, id_spectateur, id_epreuve, prix, etat)

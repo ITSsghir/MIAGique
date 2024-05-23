@@ -16,8 +16,6 @@ import java.util.List;
 public class BilletService {
     @Autowired
     private BilletRepository billetRepository;
-    private EpreuveRepository epreuveRepository;
-    private SpectateurRepository spectateurRepository;
 
     public List<Billet> findAll() {
         return billetRepository.findAll();
@@ -28,14 +26,6 @@ public class BilletService {
     }
     // doesn't work
     public Billet save(Billet billet) {
-        Epreuve epreuve = epreuveRepository.findById(billet.getId()).orElse(null);
-        Spectateur spectateur = spectateurRepository.findById(billet.getId()).orElse(null);
-        Billet billet1 = new Billet();
-        billet1.setId(billet.getId());
-        billet1.setEtat(billet.getEtat());
-        billet1.setPrix(billet.getPrix());
-        billet1.setEpreuve(epreuve);
-        billet1.setSpectateur(spectateur);
         return billetRepository.save(billet1);
     }
 
