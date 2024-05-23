@@ -1,20 +1,14 @@
-package com.MIAGE.jeuxmiagiques.translatorUnits;
+package com.MIAGE.jeuxmiagiques.translationUnits;
 
 public class BilletById {
-
-    private int id;
-
+    // Attributes
     private int epreuveId;
-
     private int spectateurId;
-
     private double prix;
-
     private String etat; // "valide", "annulé"
 
     // Constructor
-    public BilletById(int id, int epreuveId, int spectateurId, double prix, String etat) {
-        this.id = id;
+    public BilletById(int epreuveId, int spectateurId, double prix, String etat) {
         this.epreuveId = epreuveId;
         this.spectateurId = spectateurId;
         this.prix = prix;
@@ -22,10 +16,6 @@ public class BilletById {
     }
 
     // Getters
-    public int getId() {
-        return id;
-    }
-
     public int getEpreuveId() {
         return epreuveId;
     }
@@ -43,10 +33,6 @@ public class BilletById {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setEpreuveId(int epreuveId) {
         this.epreuveId = epreuveId;
     }

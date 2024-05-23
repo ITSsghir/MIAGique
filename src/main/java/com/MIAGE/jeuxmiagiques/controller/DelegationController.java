@@ -10,9 +10,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/delegations")
 public class DelegationController {
-    @Autowired
+
     private DelegationService delegationService;
 
+    @Autowired
+    public DelegationController(DelegationService delegationService) {
+        this.delegationService = delegationService;
+    }
     @GetMapping
     public List<Delegation> getAllDelegations() {
         return delegationService.findAll();

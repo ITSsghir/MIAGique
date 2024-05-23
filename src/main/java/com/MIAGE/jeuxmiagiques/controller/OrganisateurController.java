@@ -10,9 +10,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/organisateurs")
 public class OrganisateurController {
-    @Autowired
+
     private OrganisateurService organisateurService;
 
+    @Autowired
+    public OrganisateurController(OrganisateurService organisateurService) {
+        this.organisateurService = organisateurService;
+    }
     @GetMapping
     public List<Organisateur> getAllOrganisateurs() {
         return organisateurService.findAll();

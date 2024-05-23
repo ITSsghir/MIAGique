@@ -1,21 +1,10 @@
-package com.MIAGE.jeuxmiagiques.translatorUnits;
+package com.MIAGE.jeuxmiagiques.translationUnits;
 
-import java.util.List;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-
-@Entity
 public class ParticipantById {
 
     private String nom;
     private String prenom;
     private String email;
-
-    @ManyToOne
     private int delegationId;
 
     // Constructors

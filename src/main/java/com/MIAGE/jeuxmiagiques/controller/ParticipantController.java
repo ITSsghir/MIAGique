@@ -2,11 +2,13 @@ package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.Delegation;
 import com.MIAGE.jeuxmiagiques.model.Participant;
+import com.MIAGE.jeuxmiagiques.repository.DelegationRepository;
+import com.MIAGE.jeuxmiagiques.repository.ParticipantRepository;
+import com.MIAGE.jeuxmiagiques.translationUnits.ParticipantById;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.MIAGE.jeuxmiagiques.service.ParticipantService;
-import com.MIAGE.jeuxmiagiques.translatorUnits.ParticipantById;
+
 
 import java.util.List;
 
@@ -14,43 +16,46 @@ import java.util.List;
 @RequestMapping("/api/participants")
 public class ParticipantController {
     
-    private Participant participantService;
-    private Delegation delegationService;
+    private ParticipantRepository participantRepository;
+    private DelegationRepository delegationRepository;
 
     @Autowired
-    public ParticipantController(Participant participantService, Delegation delegationService) {
-        this.participantService = participantService;
-        this.delegationService = delegationService;
+    public ParticipantController(ParticipantRepository participantRepository, DelegationRepository delegationRepository) {
+        this.participantRepository = participantRepository;
+        this.delegationRepository = delegationRepository;
     }
-
     @GetMapping
-    public List<Participant> getAllParticipants() {
-        return participantService.findAll();
+    public List<Participant> findAll() {
+        return participantRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Participant getParticipantById(@PathVariable int id) {
-        return participantService.findById(id);
+    public Participant findById(@PathVariable int id) {
+        return participantRepository.findById(id).orElse(null);
     }
 
     @PostMapping
-    public Participant createParticipant(@RequestBody ParticipantById body) {
+    public Participant save(@RequestBody ParticipantById body) {
         Participant participant = new Participant();
-        Delegation delegation = delegationService.findById(body.getDelegationId());
+        Delegation delegation = delegationRepository.findById(body.getDelegationId()).orElse(null);
         participant.setNom(body.getNom());
         participant.setPrenom(body.getPrenom());
         participant.setDelegation(delegation);
-        return participantService.save(participant);
-        
+        return participantRepository.save(participant);
     }
 
     @PutMapping("/{id}")
-    public Participant updateParticipant(@PathVariable int id, @RequestBody Participant participant) {
-        return participantService.save(participant);
+    public Participant update(@PathVariable int id, @RequestBody ParticipantById body) {
+        Participant participant = participantRepository.findById(id).orElse(null);
+        Delegation delegation = delegationRepository.findById(body.getDelegationId()).orElse(null);
+        if (delegation != null) participant.setDelegation(delegation);
+        if (body.getNom() != null) participant.setNom(body.getNom());
+        if (body.getPrenom() != null) participant.setPrenom(body.getPrenom());
+        return participantRepository.save(participant);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteParticipant(@PathVariable int id) {
-        participantService.deleteById(id);
+    public void deleteById(@PathVariable int id) {
+        participantRepository.deleteById(id);
     }
 }

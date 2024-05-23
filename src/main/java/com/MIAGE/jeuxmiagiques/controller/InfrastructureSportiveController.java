@@ -10,9 +10,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/infrastructuresportives")
 public class InfrastructureSportiveController {
-    @Autowired
+
     private InfrastructureSportiveService infrastructureSportiveService;
 
+    @Autowired
+    public InfrastructureSportiveController(InfrastructureSportiveService infrastructureSportiveService) {
+        this.infrastructureSportiveService = infrastructureSportiveService;
+    }
     @GetMapping
     public List<InfrastructureSportive> getAllInfrastructureSportives() {
         return infrastructureSportiveService.findAll();

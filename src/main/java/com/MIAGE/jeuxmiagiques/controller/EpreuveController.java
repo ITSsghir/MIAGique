@@ -10,9 +10,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/epreuves")
 public class EpreuveController {
-    @Autowired
+
     private EpreuveService epreuveService;
 
+    @Autowired
+    public EpreuveController(EpreuveService epreuveService) {
+        this.epreuveService = epreuveService;
+    }
     @GetMapping
     public List<Epreuve> getAllEpreuves() {
         return epreuveService.findAll();

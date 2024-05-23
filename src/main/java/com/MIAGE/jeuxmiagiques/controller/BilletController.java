@@ -3,10 +3,12 @@ package com.MIAGE.jeuxmiagiques.controller;
 import com.MIAGE.jeuxmiagiques.model.Billet;
 import com.MIAGE.jeuxmiagiques.model.Epreuve;
 import com.MIAGE.jeuxmiagiques.model.Spectateur;
+
 import com.MIAGE.jeuxmiagiques.service.BilletService;
 import com.MIAGE.jeuxmiagiques.service.EpreuveService;
 import com.MIAGE.jeuxmiagiques.service.SpectateurService;
-import com.MIAGE.jeuxmiagiques.translatorUnits.BilletById;
+
+import com.MIAGE.jeuxmiagiques.translationUnits.BilletById;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +53,14 @@ public class BilletController {
     }
 
     @PutMapping("/{id}")
-    public Billet updateBillet(@PathVariable int id, @RequestBody Billet billet) {
+    public Billet updateBillet(@PathVariable int id, @RequestBody BilletById body) {
+        Billet billet = billetService.findById(id);
+        Epreuve epreuve = epreuveService.findById(body.getEpreuveId());
+        Spectateur spectateur = spectateurService.findById(body.getSpectateurId());
+        if (epreuve != null) billet.setEpreuve(epreuve);
+        if (spectateur != null) billet.setSpectateur(spectateur);
+        if (body.getPrix() != 0) billet.setPrix(body.getPrix());
+        if (body.getEtat() != null) billet.setEtat(body.getEtat());
         return billetService.save(billet);
     }
 

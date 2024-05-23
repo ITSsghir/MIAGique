@@ -17,7 +17,7 @@ public class Resultat {
 
     @ManyToOne
     private Participant participant;
-
+    
     private String temps; // ou "points", selon le type d'épreuve
     private int position;
 
@@ -25,7 +25,7 @@ public class Resultat {
     public int getId() {
         return id;
     }
-    
+
     public Epreuve getEpreuve() {
         return epreuve;
     }
