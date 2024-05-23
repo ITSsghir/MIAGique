@@ -41,6 +41,7 @@ public class ParticipantController {
         participant.setNom(body.getNom());
         participant.setPrenom(body.getPrenom());
         participant.setDelegation(delegation);
+        participant.setRole("PARTICIPANT");
         return participantRepository.save(participant);
     }
 

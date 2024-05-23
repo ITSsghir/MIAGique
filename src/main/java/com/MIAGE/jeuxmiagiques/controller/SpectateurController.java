@@ -32,6 +32,7 @@ public class SpectateurController {
 
     @PostMapping
     public Spectateur createSpectateur(@RequestBody Spectateur spectateur) {
+        spectateur.setRole("SPECTATEUR");
         return spectateurService.save(spectateur);
     }
 

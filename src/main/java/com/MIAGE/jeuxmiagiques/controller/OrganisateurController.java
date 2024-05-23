@@ -29,6 +29,7 @@ public class OrganisateurController {
 
     @PostMapping
     public Organisateur createOrganisateur(@RequestBody Organisateur organisateur) {
+        organisateur.setRole("ORGANISATEUR");
         return organisateurService.save(organisateur);
     }
 
