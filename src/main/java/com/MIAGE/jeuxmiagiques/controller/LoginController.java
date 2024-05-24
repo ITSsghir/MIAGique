@@ -30,17 +30,15 @@ public class LoginController {
 
     @PostMapping("/login")
     public void authenticate(@RequestBody LoginRequest loginRequest) {
-        @SuppressWarnings("unused")
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(loginRequest.getEmail());
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, loginRequest.getPassword(), userDetails.getAuthorities());
+        Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        // Set the authentication in the SecurityContextHolder
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("User " + loginRequest.getEmail() + " has been authenticated");
-    }
-
-    @PostMapping("/logout")
-    public void logout() {
-        SecurityContextHolder.clearContext();
-        System.out.println("User has been logged out");
+        // Check if the authentication is successful
+        if (!authentication.isAuthenticated()) {
+            throw new RuntimeException("Authentication failed");
+        }
+        System.out.println("Authentication successful");
     }
 }
