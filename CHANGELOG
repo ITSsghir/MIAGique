@@ -1,0 +1,3 @@
+/register/{USER_TYPE} - implemented + save user to database
+/login - implemented + save session to security context
+/logout - implemented + remove session from security context (not quite sure if it's correct)
