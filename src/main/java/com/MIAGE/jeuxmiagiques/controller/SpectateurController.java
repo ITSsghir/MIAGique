@@ -40,6 +40,18 @@ public class SpectateurController {
 
     @PutMapping("/{id}")
     public Spectateur updateSpectateur(@PathVariable int id, @RequestBody Spectateur spectateur) {
+        // Get the spectateur by id
+        Spectateur existingSpectateur = spectateurService.findById(id);
+        // Update the spectateur fields with the new values from the request body
+        if (spectateur.getNom() != null) {
+            existingSpectateur.setNom(spectateur.getNom());
+        }
+        if (spectateur.getPrenom() != null) {
+            existingSpectateur.setPrenom(spectateur.getPrenom());
+        }
+        if (spectateur.getEmail() != null) {
+            existingSpectateur.setEmail(spectateur.getEmail());
+        }
         return spectateurService.save(spectateur);
     }
 

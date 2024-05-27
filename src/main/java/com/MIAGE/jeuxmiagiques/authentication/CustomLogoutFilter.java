@@ -32,6 +32,7 @@ public class CustomLogoutFilter extends OncePerRequestFilter {
         if (logoutRequestMatcher.matches(request)) {
             if (authentication != null) {
                 SecurityContextHolder.clearContext();
+                SecurityContextHolder.getContext().setAuthentication(null);
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().write("Logout successful");
                 response.getWriter().flush();
