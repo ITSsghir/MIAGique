@@ -48,12 +48,7 @@ public class LoginController {
         String sessionId = session.getId();
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("session-id", sessionId);
-        System.out.println(responseHeaders.toString());
-        // Copy request headers to response headers
-        List<String> requestHeaderNames = Collections.list(request.getHeaderNames());
-        for (String headerName : requestHeaderNames) {
-            responseHeaders.set(headerName, request.getHeader(headerName));
-        }
+        System.out.println(responseHeaders.toString()); // Log response headers to console
         System.out.println("Session ID: " + sessionId); // Log sessionId to console
         return ResponseEntity.ok()
             .headers(responseHeaders)
