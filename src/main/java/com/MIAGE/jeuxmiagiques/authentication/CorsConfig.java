@@ -17,6 +17,7 @@ public class CorsConfig {
         config.addAllowedMethod("*"); // Allow all HTTP methods
         config.addAllowedHeader("*"); // Allow all headers
         source.registerCorsConfiguration("/**", config);
+        config.addExposedHeader("session-id");
         return new CorsFilter(source);
     }
 }

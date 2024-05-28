@@ -1,8 +1,5 @@
 package com.MIAGE.jeuxmiagiques.controller;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import com.MIAGE.jeuxmiagiques.service.CustomUserDetailsService;
 import com.MIAGE.jeuxmiagiques.translationUnits.LoginRequest;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
