@@ -44,15 +44,9 @@ public class RegistrationController {
         if (userRepository.findByEmail(user.getEmail()) != null) {
             throw new RuntimeException("User already exists");
         }
-        Spectateur spectateur = new Spectateur();
-        spectateur.setPassword(passwordEncoder.encode(user.getPassword()));
-        spectateur.setUserRole("spectateur");
-        spectateur.setNom(user.getNom());
-        spectateur.setPrenom(user.getPrenom());
-        spectateur.setEmail(user.getEmail());
-        spectateur.setUserRole(user.getUserRole());
-        
-        return spectateurRepository.save(spectateur);
+        Spectateur spectateur = new Spectateur(user.getNom(), user.getPrenom(), user.getEmail(), passwordEncoder.encode(user.getPassword()), "spectateur");
+        spectateurRepository.save(spectateur);
+        return userRepository.save(spectateur);
     }
 
     @PostMapping("/organisateur")
@@ -67,9 +61,8 @@ public class RegistrationController {
         organisateur.setNom(user.getNom());
         organisateur.setPrenom(user.getPrenom());
         organisateur.setEmail(user.getEmail());
-        organisateur.setUserRole(user.getUserRole());
-        
-        return organisateurRepository.save(organisateur);
+        organisateurRepository.save(organisateur);
+        return userRepository.save(organisateur);
     }
 
     @PostMapping("/participant")
@@ -84,8 +77,7 @@ public class RegistrationController {
         participant.setNom(user.getNom());
         participant.setPrenom(user.getPrenom());
         participant.setEmail(user.getEmail());
-        participant.setUserRole(user.getUserRole());
-        
-        return participantRepository.save(participant);
+        participantRepository.save(participant);
+        return userRepository.save(participant);
     }
 }

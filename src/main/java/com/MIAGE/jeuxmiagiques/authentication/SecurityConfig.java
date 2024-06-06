@@ -40,15 +40,18 @@ public class SecurityConfig {
             .csrf((csrf) -> csrf.disable())  // Disable CSRF for this example
             .logout((logout) -> logout
                 .logoutUrl("/logout")  // URL to trigger the logout
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    response.setStatus(200);
+                })
                 .invalidateHttpSession(true)  // Invalidate the session
-                .logoutSuccessHandler(new CustomLogoutSuccessHandler())  // Custom success handler
+                .deleteCookies("JSESSIONID")  // Delete the JSESSIONID cookie
+                
             )
             .sessionManagement((session) -> session
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)  // Create a session if required
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)  // Create a session if required
             );
 
         // Add the custom logout filter before the default LogoutFilter
-        http.addFilterBefore(new CustomLogoutFilter(), LogoutFilter.class);
 
         return http.build();
     }

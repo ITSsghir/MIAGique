@@ -18,6 +18,8 @@ public class CorsConfig {
         config.addAllowedHeader("*"); // Allow all headers
         source.registerCorsConfiguration("/**", config);
         config.addExposedHeader("session-id");
+        config.addExposedHeader("user-id");
+        config.addExposedHeader("user-role");
         return new CorsFilter(source);
     }
 }
