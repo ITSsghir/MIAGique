@@ -43,12 +43,26 @@ public class ParticipantController {
     }
 
     @PostMapping
-    public Participant save(@RequestBody User user) {
+    public Participant save(@RequestBody ParticipantById user) {
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            throw new RuntimeException("User already exists");
+        }
+        switch (user.getDelegationId()) {
+            case 0:
+                throw new RuntimeException("Delegation id is required");
+            case -1:
+                throw new RuntimeException("Delegation id is invalid");
+            default:
+                break;
+        }
+        System.out.println(user.getDelegationId());
         Participant participant = new Participant();
         participant.setNom(user.getNom());
         participant.setPrenom(user.getPrenom());
         participant.setEmail(user.getEmail());
         participant.setPassword(passwordEncoder.encode(user.getPassword()));
+        Delegation delegation = delegationRepository.findById(user.getDelegationId()).orElse(null);
+        participant.setDelegation(delegation);
         participant.setUserRole("participant");
         userRepository.save(participant);
         return participantRepository.save(participant);
