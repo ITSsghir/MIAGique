@@ -5,14 +5,13 @@ import com.MIAGE.jeuxmiagiques.model.Epreuve;
 import com.MIAGE.jeuxmiagiques.model.Participant;
 
 import com.MIAGE.jeuxmiagiques.service.ResultatService;
-import com.MIAGE.jeuxmiagiques.service.EpreuveService;
 
 import com.MIAGE.jeuxmiagiques.translationUnits.ResultatById;
 
+import com.MIAGE.jeuxmiagiques.repository.EpreuveRepository;
 import com.MIAGE.jeuxmiagiques.repository.ParticipantRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,17 +20,17 @@ import java.util.List;
 @RequestMapping("/api/resultats")
 public class ResultatController {
 
-    private ResultatService resultatService;
-    private EpreuveService epreuveService;
-    private ParticipantRepository participantRepository;
+    private final ResultatService resultatService;
+    private final EpreuveRepository epreuveRepository;
+    private final ParticipantRepository participantRepository;
 
     @Autowired
-    public ResultatController(ResultatService resultatService, EpreuveService epreuveService, ParticipantRepository participantRepository) {
+    public ResultatController(ResultatService resultatService, EpreuveRepository epreuveRepository, ParticipantRepository participantRepository) {
         this.resultatService = resultatService;
-        this.epreuveService = epreuveService;
+        this.epreuveRepository = epreuveRepository;
         this.participantRepository = participantRepository;
-
     }
+
     @GetMapping
     public List<Resultat> getAllResultats() {
         return resultatService.findAll();
@@ -44,10 +43,12 @@ public class ResultatController {
 
     @PostMapping
     public Resultat createResultat(@RequestBody ResultatById resultatById) {
-        Resultat resultat = new Resultat();
-        Epreuve epreuve = epreuveService.findById(resultatById.getEpreuveId());
-        resultat.setEpreuve(epreuve);
+        Epreuve epreuve = epreuveRepository.findById(resultatById.getEpreuveId()).orElse(null);
         Participant participant = participantRepository.findById(resultatById.getParticipantId()).orElse(null);
+        if (epreuve == null || participant == null) return null;
+        // Create the Resultat object
+        Resultat resultat = new Resultat();
+        resultat.setEpreuve(epreuve);
         resultat.setParticipant(participant);
         resultat.setPosition(resultatById.getPosition());
         resultat.setTemps(resultatById.getTemps());
@@ -57,7 +58,7 @@ public class ResultatController {
     @PutMapping("/{id}")
     public Resultat updateResultat(@PathVariable int id, @RequestBody ResultatById resultatById) {
         Resultat resultat = resultatService.findById(id);
-        Epreuve epreuve = epreuveService.findById(resultatById.getEpreuveId());
+        Epreuve epreuve = epreuveRepository.findById(resultatById.getEpreuveId()).orElse(null);
         if (epreuve != null) resultat.setEpreuve(epreuve);
         Participant participant = participantRepository.findById(resultatById.getParticipantId()).orElse(null);
         if (participant != null) resultat.setParticipant(participant);
