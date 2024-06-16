@@ -37,7 +37,21 @@ public class EpreuveController {
 
     @PutMapping("/{id}")
     public Epreuve updateEpreuve(@PathVariable int id, @RequestBody Epreuve epreuve) {
-        return epreuveService.save(epreuve);
+        Epreuve existingEpreuve = epreuveService.findById(id);
+        if (epreuve.getNom() != null) {
+            existingEpreuve.setNom(epreuve.getNom());
+        }
+        if (epreuve.getDate() != null) {
+            existingEpreuve.setDate(epreuve.getDate());
+        }
+        if (epreuve.getInfrastructure() != null) {
+            existingEpreuve.setInfrastructure(epreuve.getInfrastructure());
+        }
+        if (epreuve.getNombrePlaces() != 0) {
+            existingEpreuve.setNombrePlaces(epreuve.getNombrePlaces());
+        }
+
+        return epreuveService.save(existingEpreuve);
     }
 
     @DeleteMapping("/{id}")
