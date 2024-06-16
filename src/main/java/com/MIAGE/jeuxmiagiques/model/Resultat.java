@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -13,9 +14,11 @@ public class Resultat {
     private int id;
 
     @ManyToOne
+    @JoinColumn(name = "epreuve_id")
     private Epreuve epreuve;
 
     @ManyToOne
+    @JoinColumn(name = "participant_id")
     private Participant participant;
     
     private String temps; // ou "points", selon le type d'épreuve
