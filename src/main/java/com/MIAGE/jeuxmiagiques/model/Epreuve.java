@@ -1,10 +1,6 @@
 package com.MIAGE.jeuxmiagiques.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,13 +10,17 @@ public class Epreuve {
     private int id;
     private String nom;
     private Date date;
-    private String infrastructure;
+    
+    @ManyToOne
+    @JoinColumn(name = "infrastructure_id")
+    private InfrastructureSportive infrastructure;
+    
     private int nombrePlaces;
 
     public Epreuve() {
     }
+    
     // Getters
-
     public int getId() {
         return id;
     }
@@ -33,7 +33,7 @@ public class Epreuve {
         return date;
     }
 
-    public String getInfrastructure() {
+    public InfrastructureSportive getInfrastructure() {
         return infrastructure;
     }
 
@@ -50,13 +50,11 @@ public class Epreuve {
         this.date = date;
     }
 
-    public void setInfrastructure(String infrastructure) {
+    public void setInfrastructure(InfrastructureSportive infrastructure) {
         this.infrastructure = infrastructure;
     }
 
     public void setNombrePlaces(int nombrePlaces) {
         this.nombrePlaces = nombrePlaces;
     }
-
-
 }
