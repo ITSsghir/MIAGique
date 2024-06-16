@@ -37,6 +37,16 @@ public class InfrastructureSportiveController {
 
     @PutMapping("/{id}")
     public InfrastructureSportive updateInfrastructureSportive(@PathVariable int id, @RequestBody InfrastructureSportive infrastructureSportive) {
+        InfrastructureSportive existingInfrastructureSportive = infrastructureSportiveService.findById(id);
+        if (infrastructureSportive.getNom() != null) {
+            existingInfrastructureSportive.setNom(infrastructureSportive.getNom());
+        }
+        if (infrastructureSportive.getAdresse() != null) {
+            existingInfrastructureSportive.setAdresse(infrastructureSportive.getAdresse());
+        }
+        if (infrastructureSportive.getCapacite() != 0) {
+            existingInfrastructureSportive.setCapacite(infrastructureSportive.getCapacite());
+        }
         return infrastructureSportiveService.save(infrastructureSportive);
     }
 
