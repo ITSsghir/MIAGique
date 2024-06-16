@@ -4,6 +4,7 @@ import com.MIAGE.jeuxmiagiques.model.User;
 
 public class ParticipantById extends User {
 
+    // Attributes
     private String nom;
     private String prenom;
     private String email;
@@ -34,6 +35,7 @@ public class ParticipantById extends User {
     }
 
     public int getDelegationId() {
+        System.out.println("Delegation ID: " + delegationId);
         return delegationId;
     }
 
