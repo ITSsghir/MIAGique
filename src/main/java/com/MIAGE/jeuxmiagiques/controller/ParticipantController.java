@@ -2,14 +2,14 @@ package com.MIAGE.jeuxmiagiques.controller;
 
 import com.MIAGE.jeuxmiagiques.model.Delegation;
 import com.MIAGE.jeuxmiagiques.model.Participant;
-
+import com.MIAGE.jeuxmiagiques.model.User;
 import com.MIAGE.jeuxmiagiques.repository.DelegationRepository;
 import com.MIAGE.jeuxmiagiques.repository.ParticipantRepository;
-
+import com.MIAGE.jeuxmiagiques.repository.UserRepository;
 import com.MIAGE.jeuxmiagiques.translationUnits.ParticipantById;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,11 +21,16 @@ public class ParticipantController {
     
     private ParticipantRepository participantRepository;
     private DelegationRepository delegationRepository;
+    private UserRepository userRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ParticipantController(ParticipantRepository participantRepository, DelegationRepository delegationRepository) {
+    public ParticipantController(ParticipantRepository participantRepository, DelegationRepository delegationRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.participantRepository = participantRepository;
         this.delegationRepository = delegationRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     @GetMapping
     public List<Participant> findAll() {
@@ -38,23 +43,27 @@ public class ParticipantController {
     }
 
     @PostMapping
-    public Participant save(@RequestBody ParticipantById body) {
+    public Participant save(@RequestBody User user) {
         Participant participant = new Participant();
-        Delegation delegation = delegationRepository.findById(body.getDelegationId()).orElse(null);
-        participant.setNom(body.getNom());
-        participant.setPrenom(body.getPrenom());
-        participant.setDelegation(delegation);
+        participant.setNom(user.getNom());
+        participant.setPrenom(user.getPrenom());
+        participant.setEmail(user.getEmail());
+        participant.setPassword(passwordEncoder.encode(user.getPassword()));
         participant.setUserRole("participant");
+        userRepository.save(participant);
         return participantRepository.save(participant);
     }
 
     @PutMapping("/{id}")
     public Participant update(@PathVariable int id, @RequestBody ParticipantById body) {
         Participant participant = participantRepository.findById(id).orElse(null);
-        Delegation delegation = delegationRepository.findById(body.getDelegationId()).orElse(null);
-        if (delegation != null) participant.setDelegation(delegation);
-        if (body.getNom() != null) participant.setNom(body.getNom());
-        if (body.getPrenom() != null) participant.setPrenom(body.getPrenom());
+        // If the delegation id in not provided in the request body, we keep the current delegation
+        if (body.getDelegationId() == 0) body.setDelegationId(participant.getDelegation().getId());
+        else if (body.getDelegationId() < 0) body.setDelegationId(0);
+        else {
+            Delegation delegation = delegationRepository.findById(body.getDelegationId()).orElse(null);
+            participant.setDelegation(delegation);
+        }
         return participantRepository.save(participant);
     }
 
