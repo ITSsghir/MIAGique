@@ -52,7 +52,7 @@ public class SpectateurController {
         if (spectateur.getEmail() != null) {
             existingSpectateur.setEmail(spectateur.getEmail());
         }
-        return spectateurService.save(spectateur);
+        return spectateurService.save(existingSpectateur);
     }
 
     @DeleteMapping("/{id}")
