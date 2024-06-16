@@ -1,6 +1,8 @@
 package com.MIAGE.jeuxmiagiques.translationUnits;
 
 public class ResultatById {
+
+    // Attributes
     private int epreuveId;
     private int participantId;
     private String temps; // ou "points", selon le type d'épreuve
@@ -16,19 +18,19 @@ public class ResultatById {
 
     // Getters
     public int getEpreuveId() {
-        return epreuveId;
+        return this.epreuveId;
     }
 
     public int getParticipantId() {
-        return participantId;
+        return this.participantId;
     }
 
     public String getTemps() {
-        return temps;
+        return this.temps;
     }
 
     public int getPosition() {
-        return position;
+        return this.position;
     }
 
     // Setters
