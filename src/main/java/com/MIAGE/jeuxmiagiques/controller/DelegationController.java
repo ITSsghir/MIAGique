@@ -37,7 +37,23 @@ public class DelegationController {
 
     @PutMapping("/{id}")
     public Delegation updateDelegation(@PathVariable int id, @RequestBody Delegation delegation) {
-        return delegationService.save(delegation);
+        Delegation existingDelegation = delegationService.findById(id);
+        if (existingDelegation == null) {
+            return delegationService.save(delegation);
+        }
+        if (existingDelegation.getNom() != null) {
+            existingDelegation.setNom(delegation.getNom());
+        }
+        if (existingDelegation.getNombreMedailleOr() != 0) {
+            existingDelegation.setNombreMedailleOr(delegation.getNombreMedailleOr());
+        }
+        if (existingDelegation.getNombreMedailleArgent() != 0) {
+            existingDelegation.setNombreMedailleArgent(delegation.getNombreMedailleArgent());
+        }
+        if (existingDelegation.getNombreMedailleBronze() != 0) {
+            existingDelegation.setNombreMedailleBronze(delegation.getNombreMedailleBronze());
+        }
+        return delegationService.save(existingDelegation);
     }
 
     @DeleteMapping("/{id}")
