@@ -1,4 +1,4 @@
-package com.MIAGE.jeuxmiagiques.authentication;
+package com.MIAGE.jeuxmiagiques.authentification;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

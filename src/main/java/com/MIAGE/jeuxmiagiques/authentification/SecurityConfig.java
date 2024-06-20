@@ -1,4 +1,4 @@
-package com.MIAGE.jeuxmiagiques.authentication;
+package com.MIAGE.jeuxmiagiques.authentification;
 
 import com.MIAGE.jeuxmiagiques.service.CustomUserDetailsService;
 
