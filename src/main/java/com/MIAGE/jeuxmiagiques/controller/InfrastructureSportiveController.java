@@ -47,7 +47,7 @@ public class InfrastructureSportiveController {
         if (infrastructureSportive.getCapacite() != 0) {
             existingInfrastructureSportive.setCapacite(infrastructureSportive.getCapacite());
         }
-        return infrastructureSportiveService.save(infrastructureSportive);
+        return infrastructureSportiveService.save(existingInfrastructureSportive);
     }
 
     @DeleteMapping("/{id}")
