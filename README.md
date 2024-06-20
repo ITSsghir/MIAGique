@@ -154,6 +154,11 @@ Polymorphic child of `User`, with 1 additional field:
 
 The API uses Spring Security for authentication. The authentication is done using sessions.
 
+There are 2 classes that define the security configuration:
+
+- [`SecurityConfig`](src/main/java/com/MIAGE/jeuxmiagiques/authentification/SecurityConfig.java): The security configuration class.
+- [`CorsConfig`](src/main/java/com/MIAGE/jeuxmiagiques/authentification/CorsConfig.java): The CORS configuration class.
+
 The API has 2 roles: `ROLE_USER` and `ROLE_ADMIN` (the `ROLE_ADMIN` role is used for organizers).
 
 The API has 2 endpoints for authentication:
