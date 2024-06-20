@@ -24,7 +24,6 @@ public class BilletService {
     public Billet findById(int id) {
         return billetRepository.findById(id).orElse(null);
     }
-    // doesn't work
     public Billet save(Billet billet) {
         return billetRepository.save(billet);
     }
